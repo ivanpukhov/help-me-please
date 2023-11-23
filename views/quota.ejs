@@ -1,0 +1,32 @@
+<!-- views/quota.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Управление квотами</title>
+</head>
+<body>
+
+<% if (quota) { %>
+    <h2>Текущая квота: $<%= quota.monthlyLimit %></h2>
+    <p>Сброс квоты: <%= quota.resetDate.toDateString() %></p>
+    <!-- Форма для установки или обновления квоты -->
+    <form action="/billing-quotas/update" method="POST">
+        <input type="hidden" name="workspaceId" value="<%= workspace.id %>">
+        <input type="number" name="monthlyLimit" placeholder="Установить месячный лимит" required>
+        <button type="submit">Установить квоту</button>
+    </form>
+<% } else { %>
+    <!-- Форма для установки или обновления квоты -->
+    <form action="/billing-quotas/set" method="POST">
+        <input type="hidden" name="workspaceId" value="<%= workspace.id %>">
+        <input type="number" name="monthlyLimit" placeholder="Установить месячный лимит" required>
+        <button type="submit">Установить квоту</button>
+    </form>
+<% } %>
+
+
+
+<a href="/workspaces">Назад к рабочим пространствам</a>
+</body>
+</html>

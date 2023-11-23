@@ -1,0 +1,21 @@
+<!-- views/login.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход</title>
+</head>
+<body>
+<form action="/login" method="POST">
+    <% if (error) { %>
+        <%= error %>
+    <% } %>
+
+
+    <input type="text" name="username" placeholder="Имя пользователя" required>
+    <input type="password" name="password" placeholder="Пароль" required>
+    <button type="submit">Войти</button>
+    <a href="/register">регитсрация</a>
+
+</form>
+</body>
+</html>

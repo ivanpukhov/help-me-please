@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Рабочие пространства</title>
+</head>
+<body>
+<h1>Рабочие пространства</h1>
+
+<!-- Кнопка для создания нового рабочего пространства -->
+<a href="/create-workspace">Создать новое рабочее пространство</a>
+
+<ul>
+    <% workspaces.forEach(function(workspace) { %>
+        <li>
+            <h2><%= workspace.title %></h2>
+            <p><%= workspace.description %></p>
+
+            <!-- Ссылки на управление API токенами для каждого рабочего пространства -->
+            <a href="/api-tokens/<%= workspace.id %>">Управление API токенами</a>
+
+            <!-- Ссылки на установку квот выставления счетов -->
+            <a href="/billing-quotas/<%= workspace.id %>">Установка квот выставления счетов</a>
+
+            <!-- Ссылки на просмотр счетов -->
+            <a href="/bills/<%= workspace.id %>">Просмотр счетов</a>
+
+            <!-- Ссылка на редактирование рабочего пространства -->
+            <a href="/workspaces/edit/<%= workspace.id %>">Редактировать рабочее пространство</a>
+        </li>
+    <% }); %>
+</ul>
+</body>
+</html>

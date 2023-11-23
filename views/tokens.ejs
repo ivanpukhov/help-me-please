@@ -1,0 +1,42 @@
+<!-- views/tokens.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Токены API</title>
+</head>
+<body>
+<h1>Токены API для рабочего пространства: <%= workspace.title %></h1>
+
+<!-- Форма для создания нового токена -->
+<form action="/api-tokens/create" method="POST">
+    <input type="text" name="name" placeholder="Имя токена" required>
+    <input type="hidden" name="workspaceId" value="<%= workspace.id %>">
+    <button type="submit">Создать новый токен</button>
+</form>
+
+<h2>Существующие токены</h2>
+<ul>
+    <% tokens.forEach(function(token) { %>
+        <li>
+            <%= token.name %>
+
+            <% if (!token.revokedAt) { %>
+                <!-- Форма для отзыва токена -->
+                <span>Активен (создан: <%= token.createdAt %>)</span>
+                <span>Ключ токена <%= token.token %>)</span>
+                <form action="/api-tokens/revoke/<%= token.id %>" method="POST">
+                    <input type="hidden" name="workspaceId" value="<%= workspace.id %>">
+                    <button type="submit">Отозвать</button>
+                </form>
+            <% } else { %>
+                <!-- Информация об отозванном токене -->
+                <span>Отозван</span>
+            <% } %>
+        </li>
+    <% }); %>
+</ul>
+
+<a href="/workspaces">Назад к рабочим пространствам</a>
+</body>
+</html>

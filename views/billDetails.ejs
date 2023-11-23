@@ -1,0 +1,39 @@
+<!-- views/billDetails.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Детали счета</title>
+</head>
+<body>
+<h1>Детали счета №<%= bill.id %></h1>
+<p>Дата счета: <%= bill.billDate.toDateString() %></p>
+<h1>Использование API</h1>
+<!-- Добавляем форму для выбора месяца -->
+<form action="/bills/<%= bill.id %>" method="get">
+    <select name="month">
+        <option value="">Выберите месяц</option>
+        <!-- Здесь можно добавить опции для каждого месяца -->
+    </select>
+    <button type="submit">Фильтровать</button>
+</form>
+
+<% if(usageData && usageData.length > 0) { %>
+    <ul>
+        <% usageData.forEach(function(usage) { %>
+            <li>
+                Услуга: <%= usage.serviceType %>,
+                Продолжительность: <%= usage.durationInSeconds %> секунд,
+                Дата начала : <%= usage.usageDate %> ,
+                Стоимость за секунду: $<%= Number(usage.costPerSecond).toFixed(2) %>
+            </li>
+        <% }); %>
+    </ul>
+<% } else { %>
+    <p>Данные об использовании не найдены.</p>
+<% } %>
+</body>
+<p>Общая стоимость: $<%= bill.totalCost%></p>
+<!-- Здесь можно добавить дополнительные детали счета -->
+</body>
+</html>

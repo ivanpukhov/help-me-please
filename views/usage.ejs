@@ -1,0 +1,32 @@
+<!-- views/usage.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Использование API</title>
+</head>
+<body>
+<h1>Использование API</h1>
+<!--<form action="/api-usage/:workspaceId" method="get"> &lt;!&ndash; Используйте соответствующий путь &ndash;&gt;-->
+<!--    <input type="month" name="monthYear" value="<%= selectedDate %>">-->
+<!--    <button type="submit">Показать</button>-->
+<!--</form>-->
+<% if(usageData && usageData.length > 0) { %>
+    <ul>
+        <% usageData.forEach(function(usage) { %>
+            <li>
+                Услуга: <%= usage.serviceType %>,
+                Продолжительность: <%= usage.durationInSeconds %> секунд,
+                Стоимость за секунду: $<%= Number(usage.costPerSecond).toFixed(2) %>
+                Дата начала : <%= usage.usageDate %> ,
+
+
+            </li>
+        <% }); %>
+    </ul>
+
+<% } else { %>
+    <p>Данные об использовании не найдены.</p>
+<% } %>
+</body>
+</html>

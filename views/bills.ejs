@@ -1,0 +1,29 @@
+<!-- views/bills.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Счета</title>
+</head>
+<body>
+<h1>Счета</h1>
+
+<% if (bills && bills.length > 0) { %>
+    <ul>
+        <% bills.forEach(function(bill) { %>
+            <li>
+                Счет №<%= bill.id %>,
+                Дата: <%= bill.billDate.toDateString() %>,
+                Общая стоимость: $<%= bill.totalCost %>
+                <a href="/bills/details/<%= workspaceId %>/<%= bill.id %>">Подробнее</a>
+            </li>
+        <% }); %>
+    </ul>
+<% } else { %>
+    <p>Счета не найдены.</p>
+    <form action="/generate-bill/<%= workspaceId %>" method="post">
+        <button type="submit">Сгенерировать счет</button>
+    </form>
+<% } %>
+</body>
+</html>
